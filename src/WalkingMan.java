@@ -18,22 +18,24 @@ public class WalkingMan extends JComponent
 	{
 		head = new Ellipse2D.Double(10, 0, 10, 10);
 		body = new Rectangle(10, 10, 10, 20);
-		leftLeg = new Rectangle(5, 30, 5, 20);
-		rightLeg = new Rectangle(20, 30, 5, 20);
-		leftArm = new Rectangle(5, 10, 10, 5);
-		rightArm = new Rectangle(20, 10, 10, 5);
+		leftLeg = new Rectangle(10, 30, 4, 20);
+		rightLeg = new Rectangle(16, 30, 4, 20);
+		leftArm = new Rectangle(0, 10, 10, 4);
+		rightArm = new Rectangle(20, 10, 10, 4);
 		setBounds(x, y, 31, 51);
 	}
 	
 	public void paintComponent(Graphics g)
 	{
 		Graphics2D g2 = (Graphics2D) g;
-		g2.draw(head);
-		g2.draw(body);
-		g2.draw(leftLeg);
-		g2.draw(rightLeg);
-		g2.draw(leftArm);
-		g2.draw(rightLeg);
-		
+		g2.setColor(Color.BLUE);
+		g2.fill(head);
+		g2.fill(leftArm);
+		g2.fill(rightArm);
+		g2.setColor(Color.RED);
+		g2.fill(body);
+		g2.setColor(Color.DARK_GRAY);
+		g2.fill(leftLeg);
+		g2.fill(rightLeg);		
 	}
 }
