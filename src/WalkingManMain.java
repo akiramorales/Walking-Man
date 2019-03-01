@@ -3,6 +3,7 @@
  * Period 6
  * Walking Man Main
  */
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -11,37 +12,39 @@ import javax.swing.Timer;
 
 public class WalkingManMain extends JFrame
 {
-	public static void main(String arags[])
+	public WalkingManMain()
 	{
-		JFrame frame = new JFrame();
-		frame.setLayout(null);
-		frame.setBounds(100, 100, 300, 300);
-		
+		this.setBounds(100, 100, 300, 300);
+		this.setLayout(null);
+		this.setVisible(true);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		WalkingMan man = new WalkingMan(120, 120);
-		frame.add(man);
-		
-		@Override
+		this.add(man);
+	}
 		public  void KeyTyped(KeyEvent e)
 				{
+					int iniLocX = getX();
+					int iniLocY = getY();
 					if(e.getKeyCode() == KeyEvent.VK_UP)
 					{
-						WalkingMan.setLocation(man.get(x), man.get(y-1));
+						WalkingMan.setLocation(iniLocX, iniLocY-1);
 					}
 					else if(e.getKeyCode() == KeyEvent.VK_DOWN)
 					{
-						man.setLocation(man.get(x), man.get(y+1));
+						WalkingMan.setLocation(WalkingMan.get(x),WalkingMan.get(y+1));
 					}
 					else if(e.getKeyCode() == KeyEvent.VK_RIGHT)
 					{
-						man.setLocation(man.get(x+1), man.get(y));
+						WalkingMan.setLocation(WalkingMan.get(x+1), WalkingMan.get(y));
 					}
 					else if(e.getKeyCode() == KeyEvent.VK_LEFT)
 					{
-						man.setLocation(man.get(x-1), man.get(y));
+						WalkingMan.setLocation(WalkingMan.get(x-1), WalkingMan.get(y));
 					}
-					man.repaint();
+					repaint();
 				}
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+public static void main(String args[])
+	{
+		WalkingManMain man = new WalkingManMain();
 	}
 }
