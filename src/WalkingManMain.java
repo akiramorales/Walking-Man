@@ -3,6 +3,9 @@
  * Period 6
  * Walking Man Main
  */
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
@@ -17,33 +20,27 @@ public class WalkingManMain extends JFrame
 		WalkingMan man = new WalkingMan(120, 120);
 		frame.add(man);
 		
-		Timer t1 = new Timer(100, new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				public void keyListener(KeyEvent e)
+		@Override
+		public  void KeyTyped(KeyEvent e)
 				{
-					if(e)
+					if(e.getKeyCode() == KeyEvent.VK_UP)
 					{
-						man.setLocation(man.get(x), man.get(y-1));
+						WalkingMan.setLocation(man.get(x), man.get(y-1));
 					}
-					else if(keyPressed == KeyEvent.KEY_EVENT_RIGHT)
+					else if(e.getKeyCode() == KeyEvent.VK_DOWN)
 					{
 						man.setLocation(man.get(x), man.get(y+1));
 					}
-					else if(keyPressed == KeyEvent.KEY_EVENT_UP)
+					else if(e.getKeyCode() == KeyEvent.VK_RIGHT)
 					{
 						man.setLocation(man.get(x+1), man.get(y));
 					}
-					else if(keyPressed == KeyEvent.KEY_EVENT_DOWN)
+					else if(e.getKeyCode() == KeyEvent.VK_LEFT)
 					{
 						man.setLocation(man.get(x-1), man.get(y));
 					}
 					man.repaint();
 				}
-			}
-		});
-		t1.start();
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
