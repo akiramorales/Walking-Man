@@ -17,42 +17,61 @@ public class WalkingManMain extends JFrame
 	{
 		this.setBounds(100, 100, 300, 300);
 		this.setLayout(null);
-		this.setVisible(true);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		WalkingMan walkingMan = new WalkingMan(120, 120);
 		this.add(walkingMan);
-	}
-	Timer t1 = new Timer(100, new ActionListener()
-		{
-			public void actionPerformed (ActionEvent e)
+		
+		this.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyPressed(KeyEvent e)
 			{
-				repaint();
-			}
-		});
-	{t1.start();}
-	public void KeyTyped(KeyEvent e)
+				
+				int iniLocX = getX();
+				int iniLocY = getY();
+				if(e.getKeyCode() == KeyEvent.VK_UP)
 				{
-					int iniLocX = getX();
-					int iniLocY = getY();
-					if(e.getKeyCode() == KeyEvent.VK_UP)
-					{
-						setLocation(iniLocX, iniLocY--);
-					}
-					else if(e.getKeyCode() == KeyEvent.VK_DOWN)
-					{
-						setLocation(iniLocX, iniLocY++);
-					}
-					else if(e.getKeyCode() == KeyEvent.VK_RIGHT)
-					{
-						setLocation(iniLocX++, iniLocY);
-					}
-					else if(e.getKeyCode() == KeyEvent.VK_LEFT)
-					{
-						setLocation(iniLocX--, iniLocY);
-					}
+					iniLocY--;
+					walkingMan.setLocation(iniLocX, iniLocY);
+					repaint();
 				}
+				else if(e.getKeyCode() == KeyEvent.VK_DOWN)
+				{
+					iniLocY++;
+					walkingMan.setLocation(iniLocX, iniLocY);
+					repaint();
+				}
+				else if(e.getKeyCode() == KeyEvent.VK_RIGHT)
+				{
+					iniLocX++;
+					walkingMan.setLocation(iniLocX, iniLocY);
+					repaint();
+				}
+				else if(e.getKeyCode() == KeyEvent.VK_LEFT)
+				{
+					iniLocX--;
+					walkingMan.setLocation(iniLocX, iniLocY);
+					repaint();
+				}
+			}
+
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+		});
 		
-		
+		this.setVisible(true);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+	}
+	
 public static void main(String args[])
 	{
 		WalkingManMain man = new WalkingManMain();
