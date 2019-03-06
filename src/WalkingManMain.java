@@ -11,8 +11,9 @@ import java.awt.event.KeyListener;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
-public class WalkingManMain extends JFrame
+public class WalkingManMain extends JFrame implements ActionListener
 {
+	private WalkingMan walkingMan;
 	public WalkingManMain()
 	{
 		this.setBounds(100, 100, 300, 300);
@@ -20,44 +21,52 @@ public class WalkingManMain extends JFrame
 		WalkingMan walkingMan = new WalkingMan(120, 120);
 		this.add(walkingMan);
 		
-		this.addKeyListener(new KeyListener() {
-
+		Timer t1 = new Timer(100, this);
+		t1.start();
+		this.setFocusable(true);
+		
+		this.addKeyListener(new KeyListener()
+		{
 			@Override
 			public void keyPressed(KeyEvent e)
 			{
-				
-				int iniLocX = getX();
-				int iniLocY = getY();
 				if(e.getKeyCode() == KeyEvent.VK_UP)
 				{
-					iniLocY--;
-					walkingMan.setLocation(iniLocX, iniLocY);
-					repaint();
+					walkingMan.setY(-1);
 				}
 				else if(e.getKeyCode() == KeyEvent.VK_DOWN)
 				{
-					iniLocY++;
-					walkingMan.setLocation(iniLocX, iniLocY);
-					repaint();
+					walkingMan.setY(1);
 				}
 				else if(e.getKeyCode() == KeyEvent.VK_RIGHT)
 				{
-					iniLocX++;
-					walkingMan.setLocation(iniLocX, iniLocY);
-					repaint();
+				walkingMan.setX(1);
 				}
 				else if(e.getKeyCode() == KeyEvent.VK_LEFT)
 				{
-					iniLocX--;
-					walkingMan.setLocation(iniLocX, iniLocY);
-					repaint();
+					walkingMan.setX(-1);
 				}
 			}
 
 			@Override
-			public void keyReleased(KeyEvent arg0) {
-				// TODO Auto-generated method stub
-				
+			public void keyReleased(KeyEvent e)
+			{
+				if(e.getKeyCode() == KeyEvent.VK_UP)
+				{
+					walkingMan.setY(0);
+				}
+				else if(e.getKeyCode() == KeyEvent.VK_DOWN)
+				{
+					walkingMan.setY(0);
+				}
+				else if(e.getKeyCode() == KeyEvent.VK_RIGHT)
+				{
+					walkingMan.setX(0);
+				}
+				else if(e.getKeyCode() == KeyEvent.VK_LEFT)
+				{
+					walkingMan.setX(0);
+				}
 			}
 
 			@Override
@@ -67,13 +76,21 @@ public class WalkingManMain extends JFrame
 			}
 
 		});
-		
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-	}
+
+		walkingMan.update();
 	
 public static void main(String args[])
 	{
 		WalkingManMain man = new WalkingManMain();
 	}
+
+@Override
+public void actionPerformed(ActionEvent arg0) {
+	// TODO Auto-generated method stub
+	
+}
+
+
 }
