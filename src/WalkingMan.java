@@ -14,8 +14,6 @@ public class WalkingMan extends JComponent
 {
 	private Ellipse2D head;
 	private Rectangle body, leftLeg, rightLeg, leftArm, rightArm;
-	private int changeX;
-	private int changeY;
 	private int dx = 0, dy = 0;
 	public WalkingMan(int x, int y)
 	

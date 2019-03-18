@@ -8,18 +8,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
 public class WalkingManMain extends JFrame implements ActionListener
 {
 	private WalkingMan walkingMan;
+	private Ball ball;
 	public WalkingManMain()
 	{
 		this.setBounds(100, 100, 600, 600);
 		this.setLayout(null);
+		ArrayList<Ball> ballList = new ArrayList<>();
 		walkingMan = new WalkingMan(120, 120);
+		ball = new Ball(walkingMan.getX()+ 31, walkingMan.getY()+10);
 		this.add(walkingMan);
+		this.add(ball);
 		
 		Timer t1 = new Timer(100, this);
 		t1.start();
@@ -34,17 +40,22 @@ public class WalkingManMain extends JFrame implements ActionListener
 				{
 					walkingMan.setY(-3);
 				}
-				else if(e.getKeyCode() == KeyEvent.VK_DOWN && walkingMan.getY()+51 < getY()+getHeight())
+				else if(e.getKeyCode() == KeyEvent.VK_DOWN)
 				{
 					walkingMan.setY(3);
 				}
-				else if(e.getKeyCode() == KeyEvent.VK_RIGHT && walkingMan.getX()+31 < getX()+getWidth())
+				else if(e.getKeyCode() == KeyEvent.VK_RIGHT)
 				{
 					walkingMan.setX(3);
 				}
-				else if(e.getKeyCode() == KeyEvent.VK_LEFT && walkingMan.getX() > getX())
+				else if(e.getKeyCode() == KeyEvent.VK_LEFT)
 				{
 					walkingMan.setX(-3);
+				}
+				else if(e.getKeyCode() == KeyEvent.VK_SPACE)
+				{
+					ballList.add(ball);
+					ball.move();
 				}
 			}
 
@@ -67,6 +78,10 @@ public class WalkingManMain extends JFrame implements ActionListener
 				{
 					walkingMan.setX(0);
 				}
+				else if (e.getKeyCode() == KeyEvent.VK_SPACE)
+				{
+					ball.move();
+				}
 			}
 
 			@Override
@@ -84,6 +99,10 @@ public class WalkingManMain extends JFrame implements ActionListener
 	
 	public void actionPerformed(ActionEvent e)
 	{
+		if(walkingMan.getX()<0) walkingMan.setLocation(0, walkingMan.getY());
+		if(walkingMan.getY()<0) walkingMan.setLocation(walkingMan.getX(), 0);
+		if(walkingMan.getY()+51 > getHeight()) walkingMan.setLocation(walkingMan.getX(), getHeight());
+		if(walkingMan.getX()+31 > getWidth()) walkingMan.setLocation(getWidth(), walkingMan.getY());
 		walkingMan.update();
 		repaint();
 	}
